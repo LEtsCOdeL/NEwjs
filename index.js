@@ -4,24 +4,24 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 
 // generating Access Token from refresh token
-// let config2 = {
-//   method: 'post',
-//   maxBodyLength: Infinity,
-//   url: 'https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.4d84438da980badf02d4b1c7794baab9.3da09dff874de762ced9df521a042de0&client_id=1000.G73LKHN42126L4O4L6AGP0Y57B48UA&client_secret=b24d8b4b3a7fe61ca795fa59d29c28af2c3d578223&grant_type=refresh_token',
-//   headers: { 
-//   }
-// };
+let config2 = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.4d84438da980badf02d4b1c7794baab9.3da09dff874de762ced9df521a042de0&client_id=1000.G73LKHN42126L4O4L6AGP0Y57B48UA&client_secret=b24d8b4b3a7fe61ca795fa59d29c28af2c3d578223&grant_type=refresh_token',
+  headers: { 
+  }
+};
 
-// axios.request(config2)
-// .then((response) => {
-//      global.access_token = response.data.access_token
-//   console.log(access_token);
-// })
-// .catch((error) => {
-//   console.log(error);
-// });
+axios.request(config2)
+.then((response) => {
+     global.access_token = response.data.access_token
+  console.log(access_token);
+})
+.catch((error) => {
+  console.log(error);
+});
 
-const access_token = '1000.b86bedf3117478fc020b7760f8fd5f9c.2c8f2a1cff054ef7b63319d247a85bcd';
+const access_token = access_token;
 
 
 ////////////////
