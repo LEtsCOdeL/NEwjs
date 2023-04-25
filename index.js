@@ -2,27 +2,26 @@ require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const bodyParser = require('body-parser');
+let data = '';
 
-// generating Access Token from refresh token
-let config2 = {
+let config = {
   method: 'post',
   maxBodyLength: Infinity,
-  url: 'https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.0c1b7cc33fbcfdc52bcb00d6428d4a12.d104f21930eb1f682ba989b6fb87dc45&client_id=1000.G73LKHN42126L4O4L6AGP0Y57B48UA&client_secret=b24d8b4b3a7fe61ca795fa59d29c28af2c3d578223&grant_type=refresh_token',
+  url: 'https://accounts.zoho.in/oauth/v2/token?refresh_token=1000.4611192342ea904404138db35bde5122.5b90d014d9e855e979ef2b4d8720abbb&client_id=1000.QOWO0XMYJCMFER0LS7UGU3MKFRKJNI&client_secret=f1e42bd92714a2251ab1730acf64e9618ba370c99a&grant_type=refresh_token',
   headers: { 
-  }
+  },
+  data : data
 };
 
-axios.request(config2)
+axios.request(config)
 .then((response) => {
-     const access_token = response.data.access_token; // initialization of access_token
-  console.log(access_token);
+  console.log(JSON.stringify(response.data.access_token));
+  global.access_token =response.data.access_token;
+  console.log("access data ="+access_token);
 })
 .catch((error) => {
   console.log(error);
 });
-
-// const access_token = access_token;
-
 
 ////////////////
 const { TOKEN, SERVER_URL } = process.env
