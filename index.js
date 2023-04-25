@@ -17,7 +17,7 @@ axios.request(config)
 .then((response) => {
   console.log(JSON.stringify(response.data.access_token));
   global.access_token =response.data.access_token;
-  console.log("access data ="+access_token);
+  console.log("access data ="+ access_token);
 })
 .catch((error) => {
   console.log(error);
@@ -135,7 +135,7 @@ app.post(URI, async (req, res) => {
 
 })
 
-app.listen(process.env.PORT || 6900, async () => {
-    console.log('🚀 app running on port', process.env.PORT || 6900)
+app.listen(process.env.PORT || 10000, async () => {
+    console.log('🚀 app running on port', process.env.PORT || 10000)
     await init()
 })
