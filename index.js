@@ -1,7 +1,9 @@
 require('dotenv').config();
 const express = require('express');
+const idsArray = require('./idsArray.json');
 const axios = require('axios');
 const bodyParser = require('body-parser');
+
 let data = '';
 
 let config = {
@@ -18,12 +20,16 @@ axios.request(config)
   console.log(JSON.stringify(response.data.access_token));
   global.access_token =response.data.access_token;
   console.log("access data ="+ access_token);
+
+  console.log(idsArray);
+  
 })
 .catch((error) => {
   console.log(error);
 });
 
-////////////////
+
+//////////////
 const { TOKEN, SERVER_URL } = process.env
 const TELEGRAM_API = `https://api.telegram.org/bot${TOKEN}`
 const URI = `/webhook/${TOKEN}`
@@ -34,9 +40,10 @@ app.use(bodyParser.json())
 
 const init = async () => {
     const res = await axios.get(`${TELEGRAM_API}/setWebhook?url=${WEBHOOK_URL}`)
-    console.log(res.data);
+    // console.log(res.data);
+    // const idsArray = await getContactIds();
+    // console.log(idsArray);
 }
-
 
 app.post(URI, async (req, res) => {
 
@@ -92,8 +99,11 @@ app.post(URI, async (req, res) => {
 
 
     // insert record in Zoho Bigin
-    const contact_id = "496297000000287176"; 
-    
+
+
+    // const contact_id = "496297000000287176"; 
+    const contactt_id=idsArray;
+    console.log(contactt_id);
     let data = JSON.stringify({
       "data": [
         {
@@ -101,31 +111,54 @@ app.post(URI, async (req, res) => {
         }
       ]
     });
-        
-    let config = {
-      method: 'POST',
-      maxBodyLength: Infinity,
-      url: `https://www.zohoapis.in/bigin/v1/Deals/${contact_id}/Notes?`,
-      headers: { 
-        'Content-Type': 'application/json', 
-        'Authorization': 'Bearer ' + access_token
-      },
-      data : data
-    };
+
+    contactt_id.forEach(addatafunc);
+
+
+    function addatafunc(contact_id){
+      let config = {
+        method: 'POST',
+        maxBodyLength: Infinity,
+        url: `https://www.zohoapis.in/bigin/v1/Deals/${contact_id}/Notes?`,
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': 'Bearer ' + access_token
+        },
+        data : data
+      };
+      
+      axios.request(config)
+      .then((response) => {
+        // console.log(JSON.stringify(response.data));
+        console.log("Data successfully pushed to Bigin")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  
+
+    }
+    // let config = {
+    //   method: 'POST',
+    //   maxBodyLength: Infinity,
+    //   url: `https://www.zohoapis.in/bigin/v1/Deals/${contact_id}/Notes?`,
+    //   headers: { 
+    //     'Content-Type': 'application/json', 
+    //     'Authorization': 'Bearer ' + access_token
+    //   },
+    //   data : data
+    // };
     
-    axios.request(config)
-    .then((response) => {
-      // console.log(JSON.stringify(response.data));
-      console.log("Data successfully pushed to Bigin")
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    // axios.request(config)
+    // .then((response) => {
+    //   // console.log(JSON.stringify(response.data));
+    //   console.log("Data successfully pushed to Bigin")
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
 
     // end of insert record 
-
-
-
 
     // await axios.post(`${TELEGRAM_API}/sendMessage`, {
     //     chat_id: chatId,
