@@ -1,19 +1,11 @@
 const fs = require('fs');
 require('dotenv').config();
-<<<<<<< HEAD
-=======
-const express = require('express');
-const idsArray = require('./idsArray.json');
->>>>>>> 93d2700e82f159482d4a75b93e4ca46c38e71210
 const axios = require('axios');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-<<<<<<< HEAD
 const idsArray = require('./idsArray.json');
 
-=======
->>>>>>> 93d2700e82f159482d4a75b93e4ca46c38e71210
 let data = '';
 
 let config = {
@@ -25,7 +17,6 @@ let config = {
 };
 
 axios.request(config)
-<<<<<<< HEAD
   .then(async (response) => {
     const access_token = response.data.access_token; // Define access_token here
     console.log(JSON.stringify(access_token));
@@ -39,26 +30,6 @@ axios.request(config)
   .catch((error) => {
     console.log(error);
   });
-=======
-.then((response) => {
-  console.log(JSON.stringify(response.data.access_token));
-  global.access_token =response.data.access_token;
-  console.log("access data ="+ access_token);
-
-  console.log(idsArray);
-  
-})
-.catch((error) => {
-  console.log(error);
-});
-
-
-//////////////
-const { TOKEN, SERVER_URL } = process.env
-const TELEGRAM_API = `https://api.telegram.org/bot${TOKEN}`
-const URI = `/webhook/${TOKEN}`
-const WEBHOOK_URL = SERVER_URL + URI
->>>>>>> 93d2700e82f159482d4a75b93e4ca46c38e71210
 
 async function initialize(access_token) {
   const { TOKEN, SERVER_URL } = process.env;
@@ -66,7 +37,6 @@ async function initialize(access_token) {
   const URI = `/webhook/${TOKEN}`;
   const WEBHOOK_URL = SERVER_URL + URI;
 
-<<<<<<< HEAD
   const app = express();
   app.use(bodyParser.json());
 
@@ -85,16 +55,6 @@ async function initialize(access_token) {
       console.log(`Webhook set for contact ID ${contactId}`);
     }
   };
-=======
-const init = async () => {
-    const res = await axios.get(`${TELEGRAM_API}/setWebhook?url=${WEBHOOK_URL}`)
-    // console.log(res.data);
-    // const idsArray = await getContactIds();
-    // console.log(idsArray);
-}
-
-app.post(URI, async (req, res) => {
->>>>>>> 93d2700e82f159482d4a75b93e4ca46c38e71210
 
   app.post(URI, async (req, res) => {
     console.log("response obj", req.body);
@@ -130,7 +90,6 @@ app.post(URI, async (req, res) => {
 
     content += `Message: ${message}\n\n`;
 
-<<<<<<< HEAD
     const fileContent = JSON.stringify(content);
     fs.writeFile('messageData.json', fileContent, (err) => {
       if (err) {
@@ -139,78 +98,10 @@ app.post(URI, async (req, res) => {
         console.log('Data written to file successfully!');
       }
     });
-=======
-    // module.exports(data2);
-    // const chatId = req.body.message.chat.id
-    // const text = req.body.message.text
-
-
-
-    // insert record in Zoho Bigin
-
-
-    // const contact_id = "496297000000287176"; 
-    const contactt_id=idsArray;
-    console.log(contactt_id);
-    let data = JSON.stringify({
-      "data": [
-        {
-          "Note_Content": content
-        }
-      ]
-    });
-
-    contactt_id.forEach(addatafunc);
-
-
-    function addatafunc(contact_id){
-      let config = {
-        method: 'POST',
-        maxBodyLength: Infinity,
-        url: `https://www.zohoapis.in/bigin/v1/Deals/${contact_id}/Notes?`,
-        headers: { 
-          'Content-Type': 'application/json', 
-          'Authorization': 'Bearer ' + access_token
-        },
-        data : data
-      };
-      
-      axios.request(config)
-      .then((response) => {
-        // console.log(JSON.stringify(response.data));
-        console.log("Data successfully pushed to Bigin")
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  
-
-    }
-    // let config = {
-    //   method: 'POST',
-    //   maxBodyLength: Infinity,
-    //   url: `https://www.zohoapis.in/bigin/v1/Deals/${contact_id}/Notes?`,
-    //   headers: { 
-    //     'Content-Type': 'application/json', 
-    //     'Authorization': 'Bearer ' + access_token
-    //   },
-    //   data : data
-    // };
-    
-    // axios.request(config)
-    // .then((response) => {
-    //   // console.log(JSON.stringify(response.data));
-    //   console.log("Data successfully pushed to Bigin")
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
->>>>>>> 93d2700e82f159482d4a75b93e4ca46c38e71210
 
     res.sendStatus(200);
   });
 
-<<<<<<< HEAD
   await init();
 
   const port = process.env.PORT || 3000;
@@ -223,17 +114,3 @@ app.post(URI, async (req, res) => {
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-=======
-    // await axios.post(`${TELEGRAM_API}/sendMessage`, {
-    //     chat_id: chatId,
-    //     text: text
-    // })
-    return res.send()
-
-})
-
-app.listen(process.env.PORT || 10000, async () => {
-    console.log('🚀 app running on port', process.env.PORT || 10000)
-    await init()
-})
->>>>>>> 93d2700e82f159482d4a75b93e4ca46c38e71210
