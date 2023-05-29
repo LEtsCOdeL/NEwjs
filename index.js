@@ -15,7 +15,7 @@ function getZohoAccessToken() {
   let config = {
     method: 'post',
     maxBodyLength: Infinity,
-    url: 'https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.63eea01115414f39221f6d325e1d875b.e6e623bcf6b9b1d2629c14831c7b6484&client_id=1000.G73LKHN42126L4O4L6AGP0Y57B48UA&client_secret=b24d8b4b3a7fe61ca795fa59d29c28af2c3d578223&grant_type=refresh_token',
+    url: 'https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.7b552e65f120e79044124945456820e7.7193881ce5844db1bfce123998d99448&client_id=1000.G73LKHN42126L4O4L6AGP0Y57B48UA&client_secret=b24d8b4b3a7fe61ca795fa59d29c28af2c3d578223&grant_type=refresh_token',
     headers: {},
     data: data
   };
