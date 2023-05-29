@@ -15,7 +15,7 @@ function getZohoAccessToken() {
   let config = {
     method: 'post',
     maxBodyLength: Infinity,
-    url: 'https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.7b552e65f120e79044124945456820e7.7193881ce5844db1bfce123998d99448&client_id=1000.G73LKHN42126L4O4L6AGP0Y57B48UA&client_secret=b24d8b4b3a7fe61ca795fa59d29c28af2c3d578223&grant_type=refresh_token',
+    url: 'https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.fc2564271fdea7786371bbf9f7278bdb.43c7ae474098b56357a5612ad2455c23&client_id=1000.G73LKHN42126L4O4L6AGP0Y57B48UA&client_secret=b24d8b4b3a7fe61ca795fa59d29c28af2c3d578223&grant_type=refresh_token',
     headers: {},
     data: data
   };
@@ -41,7 +41,6 @@ function retrieveContactIds() {
       'Authorization': 'Bearer ' + access_token
     }
   };
-
   return axios.request(config)
     .then((response) => {
       const responsedata = JSON.parse(JSON.stringify(response.data));
